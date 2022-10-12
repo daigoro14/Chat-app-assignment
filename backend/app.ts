@@ -8,7 +8,8 @@ const MongoStore = require("connect-mongo");
 const path = require('path')
 dotenv.config()
 
-const authRouter = require('./auth').router
+const authRouter = require('./auth.ts').router
+
 const pageRouter = require('./page').router
 
 const secretKey = process.env.secretKey
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 8080;
 const mongoUrl = 'mongodb://localhost/ts-chat-app'
 
 app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 
 app.use(session({
     secret: secretKey,
@@ -34,3 +36,5 @@ mongoose.connect(mongoUrl)
 app.listen(PORT, () => {
   console.log(`Started Express server on port ${PORT}`)
 })
+
+export {express, passport};

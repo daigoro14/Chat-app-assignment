@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-// import './App.css';
 
 
 export default function ChatPage() {
@@ -9,6 +8,22 @@ console.log('You reached the chat page')
 
 const [message, setMessage] = useState("")
 const [messages, setMessages] = useState("")
+
+useEffect(() => {
+    fetchData()
+}, [])
+
+function fetchData() {
+    fetch('/page/data', {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+
+    })
+}
 
 const array = [
     {
@@ -20,6 +35,11 @@ const array = [
         time: "13:00",
         user: "D-ro",
         message: "Hej this is my message",
+    },
+    {
+        time: "19:44",
+        user: "D-ro",
+        message: "Whaddup cuuuzzzin"
     }
 ]
 

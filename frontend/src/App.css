@@ -97,13 +97,17 @@ background-color: #fbd461;
   position: relative;
   top: 180px;
   margin:0 auto 0 auto;
-  padding: 25px 0 0 0;
+  /* padding: 25px 0 0 0; */
   display: block;
   width: 240px;
-  height: 200px;
+  /* height: 200px; */
   border: 1px solid grey;
-  border-radius: 8px;
+  border-radius: 4px;
   text-align: center;
+}
+
+#formDiv {
+  margin: 20px 0 20px 0;
 }
 
 #loginForm input {
@@ -124,4 +128,9 @@ background-color: #fbd461;
 #loginForm label {
   margin: 15px 0 0 0;
   display: block;
+}
+
+#loginForm  button{
+  display: block;
+  margin: 5px auto 10px auto;
 }
