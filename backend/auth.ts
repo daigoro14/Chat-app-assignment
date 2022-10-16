@@ -8,13 +8,9 @@ passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-// router.post('/register', async (req: any, res: any)  => {
-//         const user = new User({username: req.body.username})
-//         await user.save()
-// })
 
 router.post('/register', async (req: any, res: any)  => {
-    const user = new User({username: req.body.username, email: req.body.username})
+    const user = new User({username: req.body.username, email: req.body.email})
     await user.setPassword(req.body.password)
     await user.save()
 })
@@ -22,5 +18,12 @@ router.post('/register', async (req: any, res: any)  => {
 router.post('/login', passport.authenticate('local', {
     successRedirect: "/page/posts"
 }))
+
+router.post('/logOut', async(req: any, res: any, next: any) => {
+    req.logout(function(err: any) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+  })
 
 exports.router = router

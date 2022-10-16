@@ -31,7 +31,7 @@ export default function LoginPage() {
                     <input name="email" type="email" onChange={(e) => setEmail(e.target.value)} required/>
                     <label htmlFor="password">Password</label>
                     <input name="password" type="password" onChange={(e) => setPassword(e.target.value)} required/>
-                    <Link to="/login"><button onClick={register}>Login</button></Link>
+                    <Link to="/login"><button onClick={register}>Register</button></Link>
                     <Link to="/login">Already got an account?</Link>
                 </div>
             </form>
