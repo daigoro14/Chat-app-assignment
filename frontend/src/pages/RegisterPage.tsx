@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 export default function LoginPage() {
     
+    const navigate = useNavigate()
+
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -15,6 +17,14 @@ export default function LoginPage() {
             },
             body: JSON.stringify({username, email, password})
         })
+        navigate('/login')
+    }
+
+
+    function onEnterPress(e: any) {
+        if (e.key === "Enter" && e.shiftKey === false) {
+            register()
+        }
     }
 
   return (
@@ -23,18 +33,16 @@ export default function LoginPage() {
             <h1 id="header">Register</h1>
         </div>
         <div id="contentDiv">
-            <form id="loginForm" action="">
                 <div id="formDiv">
                     <label htmlFor="name">Username</label>
-                    <input name="username" type="text" onChange={(e) => setUsername(e.target.value)} required/>
+                    <input onKeyPress={onEnterPress} name="username" type="text" onChange={(e) => setUsername(e.target.value)} required/>
                     <label htmlFor="name">Email</label>
-                    <input name="email" type="email" onChange={(e) => setEmail(e.target.value)} required/>
+                    <input onKeyPress={onEnterPress} name="email" type="email" onChange={(e) => setEmail(e.target.value)} required/>
                     <label htmlFor="password">Password</label>
-                    <input name="password" type="password" onChange={(e) => setPassword(e.target.value)} required/>
-                    <Link to="/login"><button onClick={register}>Register</button></Link>
+                    <input onKeyPress={onEnterPress} name="password" type="password" onChange={(e) => setPassword(e.target.value)} required/>
+                    <button id="loginButton" onClick={register}>Register</button>
                     <Link to="/login">Already got an account?</Link>
                 </div>
-            </form>
         </div>
     </>
   )

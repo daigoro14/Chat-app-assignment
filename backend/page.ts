@@ -17,12 +17,7 @@ router.use(ensureLoggedIn("/auth/login"))
 
 router.get('/data', async (req: any, res: any) => {
         const messages = await Message.find()
-        // const friendsMessage = await Message.find({username: {$ne: req.user.username}})
-        // console.log(friendsMessage)
-        // const myMessage = await Message.find({username: req.user.username})
-        // console.log(myMessage)
         const user = req.user
-        // res.
         res.json({user, messages})
 })
 

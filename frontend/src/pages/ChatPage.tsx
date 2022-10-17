@@ -1,8 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { DataRouterContext } from 'react-router/dist/lib/context';
-
+import {useNavigate} from 'react-router-dom'
 
 export default function ChatPage() {
+
+const navigate = useNavigate()
 
 const [user, setUser] = useState<any>("")
 const [createMessage, setCreateMessage] = useState("")
@@ -10,6 +11,7 @@ const [messages, setMessages] = useState<{_id: string; username: string; message
 
 useEffect(() => {
     fetchData()
+    scrollDown()
 }, [])
 
 function fetchData() {
@@ -35,13 +37,14 @@ function fetchData() {
 }
 
 
-function logOut() {
-    fetch('/auth/logOut', {
+async function logOut() {
+    await fetch('/auth/logOut', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         }
     })
+    navigate('/login')
 }
 
 
@@ -60,11 +63,18 @@ function sendMessage() {
     }
 
     function onEnterPress(e: any) {
-        if (e.key === "Enter" && e.shiftKey == false) {
+        if (e.key === "Enter" && e.shiftKey === false) {
             sendMessage()
         }
     }
     
+    // const content = React.useRef() as React.MutableRefObject<HTMLDivElement>
+    const content = React.useRef<HTMLDivElement>(null)
+    
+    function scrollDown() {
+        // console.log(content.current)
+        content.current?.scrollIntoView({block: 'end'})
+    }
 
 
   return (
@@ -75,17 +85,17 @@ function sendMessage() {
             <button id="logOutButton" onClick={logOut}>Log out</button>
         </div>
         <div id="contentDiv">
-            <div id="messageList">
-            {messages && (messages.map((object, index) => {
+            <div ref={content} id="messageList">
+            {messages && (messages.map((object) => {
                 return (
                     <>
                         {object.username == user.username ? (
-                            <div key={index} className="myMessageDiv">
+                            <div className="myMessageDiv">
                                 <p className="myMessageP">{object.message}</p>
                                 <p className="myMessageInfo">@{object.username} - {object.date}</p>
                             </div>
                         ) : (
-                            <div key={index} className="friendsMessageDiv">
+                            <div className="friendsMessageDiv">
                                 <p className="friendsMessageP">{object.message}</p>
                                 <p className="friendsMessageInfo">@{object.username} - {object.date}</p>
                             </div>
@@ -95,7 +105,7 @@ function sendMessage() {
             }))}
             </div>
             <div id="createMessage">
-                <textarea id="messageTextarea" onKeyPress={onEnterPress} value={createMessage} onChange={(e) => setCreateMessage(e.target.value)}/>
+                <textarea id="messageTextarea" required onKeyPress={onEnterPress} value={createMessage} onChange={(e) => setCreateMessage(e.target.value)}/>
                 <button id="sendButton" onClick={sendMessage}>Send</button>
             </div>
         </div>
