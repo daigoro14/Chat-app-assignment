@@ -13,6 +13,7 @@ router.post('/register', async (req: any, res: any)  => {
     const user = new User({username: req.body.username, email: req.body.email})
     await user.setPassword(req.body.password)
     await user.save()
+    res.json({})
 })
 
 router.post('/login', passport.authenticate('local', {
