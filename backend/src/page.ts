@@ -1,10 +1,10 @@
 import {express, passport} from "./app"
-import { Message } from "./models/message"
+import { Message } from "../models/message"
 const { ensureLoggedIn } = require('connect-ensure-login')
 
 const router = express.Router()
 
-const {User} = require('./models/user')
+const {User} = require('../models/user')
 
 passport.use(User.createStrategy())
 

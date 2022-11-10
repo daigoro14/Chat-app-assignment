@@ -33,13 +33,13 @@ export default function LoginPage() {
         </div>
         <div id="contentDiv">
             <div id="formDiv">
-                    <label htmlFor="name">Username or email</label>
-                    <input onKeyPress={onEnterPress} name="username" type="text" onChange={(e) => setUsername(e.target.value)}/>
-                    <label htmlFor="password">Password</label>
-                    <input onKeyPress={onEnterPress} name="password" type="password" onChange={(e) => setPassword(e.target.value)}/>
-                    <button onClick={login}>Login</button>
-                    <Link to="/register">Register</Link>
-                </div>
+                <label htmlFor="name">Username or email</label>
+                <input onKeyPress={onEnterPress} name="username" type="text" onChange={(e) => setUsername(e.target.value)}/>
+                <label htmlFor="password">Password</label>
+                <input onKeyPress={onEnterPress} name="password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+                <button onClick={login}>Login</button>
+                <Link to="/register">Register</Link>
+            </div>
         </div>
     </>
   )

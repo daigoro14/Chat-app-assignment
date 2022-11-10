@@ -3,19 +3,17 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const passport = require('passport')
 const dotenv = require('dotenv')
-const { ensureLoggedIn } = require('connect-ensure-login')
 const MongoStore = require("connect-mongo");
-const path = require('path')
 dotenv.config()
 
-const authRouter = require('./auth.ts').router
+const authRouter = require('./auth').router
 
 const pageRouter = require('./page').router
 
 const secretKey = process.env.secretKey
 const app = express()
 const PORT = process.env.PORT || 8080;
-const mongoUrl = 'mongodb://localhost/ts-chat-app'
+const mongoUrl: string = process.env.MONGODB_URL || 'mongodb://localhost:27017/ts-chat-app'
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())

@@ -105,7 +105,7 @@ function sendMessage() {
             }))}
             </div>
             <div id="createMessage">
-                <textarea id="messageTextarea" required onKeyPress={onEnterPress} value={createMessage} onChange={(e) => setCreateMessage(e.target.value)}/>
+                <textarea id="messageTextarea"   onKeyPress={onEnterPress} value={createMessage} onChange={(e) => setCreateMessage(e.target.value)}/>
                 <button id="sendButton" onClick={sendMessage}>Send</button>
             </div>
         </div>
