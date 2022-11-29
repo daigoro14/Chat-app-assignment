@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom'
+import { url } from '../App'
 
 export default function ChatPage() {
 
@@ -15,7 +16,7 @@ useEffect(() => {
 }, [])
 
 function fetchData() {
-    fetch('/page/data', {
+    fetch(`${url}/page/data`, {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -38,7 +39,7 @@ function fetchData() {
 
 
 async function logOut() {
-    await fetch('/auth/logOut', {
+    await fetch(`${url}/auth/logOut`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -51,7 +52,7 @@ async function logOut() {
 
 
 function sendMessage() {
-    fetch('/page/sendMessage', {
+    fetch(`${url}/page/sendMessage`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

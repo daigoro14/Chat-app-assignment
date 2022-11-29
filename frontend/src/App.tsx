@@ -5,9 +5,9 @@ import axios from "axios";
 import ChatPage from './pages/ChatPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import EnterNamePage from './pages/EnterNamePage';
 
-axios.defaults.baseURL = 
-  process.env.REACT_APP_CHATAPP_API || "htpt://localhost:8080";
+export const url = process.env.REACT_APP_CHATAPP_API || "http://localhost:8080";
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
             <Route path="/" element={<ChatPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/name" element={<EnterNamePage/>}/>
           </Routes>
         </Router>
       </div>

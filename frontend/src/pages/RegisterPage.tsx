@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+import { url } from '../App'
 
 export default function LoginPage() {
     
@@ -10,7 +11,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState('')
 
     async function register() {
-        await fetch('/auth/register', {
+        await fetch(`${url}/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

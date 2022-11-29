@@ -18,4 +18,4 @@ RUN npm run build -w frontend
 
 EXPOSE 3000
 
-CMD [ "npx", "serve", "frontend/build"]
+CMD [ "npx", "serve", "-s", "frontend/build"]
