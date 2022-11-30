@@ -7,11 +7,7 @@ const MongoStore = require("connect-mongo");
 const cors = require('cors')
 dotenv.config()
 
-const authRouter = require('./auth').router
 const pageRouter = require('./page').router
-
-//NEW IDEA
-const nameRouter = require('./name').router
 
 const app = express()
 
@@ -24,14 +20,6 @@ app.use(cors())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-// app.use(session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: MongoStore.create({mongoUrl}),
-// }))
-
-//NEW IDEA STARTS
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -41,29 +29,25 @@ app.use(session({
 
 var sess: any;
 
-app.get('/',(req: any,res: any) => {
-  sess = req.session;
-  if(sess.email) {
-      return res.redirect('/admin');
-  }
-  res.sendFile('index.html');
-});
-
 app.post('/login',(req: any,res: any) => {
   sess = req.session;
-  sess.username = req.body.username;
-  res.redirect('/name/username');
+  sess.user = req.body.username;
+  res.redirect('/page/data');
+});
+
+app.get('/logout',(req: any, res: any) => {
+  req.session.destroy((err: any) => {
+        if(err) {
+            return console.log(err);
+        }
+    sess = undefined;
+    res.redirect('/page/data');
+    });
+
 });
 
 
-//NEW IDEA ENDS
-
-
-// app.use(passport.authenticate('session'))
-
-app.use('/auth', authRouter)
 app.use('/page', pageRouter)
-app.use('/name', nameRouter)
 
 mongoose.connect(mongoUrl)
 app.listen(PORT, () => {
