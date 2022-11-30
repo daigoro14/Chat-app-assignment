@@ -85,7 +85,7 @@ function sendMessage() {
             {messages && (messages.map((object) => {
                 return (
                     <div key={object._id} >
-                        {object.username == user ? (
+                        {object.username === user ? (
                             <div className="myMessageDiv">
                                 <p className="myMessageP">{object.message}</p>
                                 <p className="myMessageInfo">@{object.username} - {object.date}</p>
