@@ -4,12 +4,13 @@ WORKDIR /usr/src/app
 
 COPY ./package*.json ./
 COPY ./backend/package*.json ./backend/
-# COPY ./shared/package*json ./
 
 RUN npm ci -w backend
 
 COPY ./backend/ ./backend/
-# COPY ./shared/ ./shared/
+
+ARG APP_SECRET
+ENV SESSION_SECRET=${APP_SECRET}
 
 RUN npm run build -w backend
 

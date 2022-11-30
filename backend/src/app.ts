@@ -13,6 +13,8 @@ const app = express()
 
 const PORT = process.env.PORT || 8080;
 const mongoUrl: string = process.env.MONGODB_URL || 'mongodb://localhost:27017/ts-chat-app'
+const secret = process.env.SESSION_SECRET || 'secret'
+
 
 app.use(cors())
 
@@ -21,7 +23,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: secret,
   resave: true,
   saveUninitialized: true,
   store: MongoStore.create({mongoUrl}),
